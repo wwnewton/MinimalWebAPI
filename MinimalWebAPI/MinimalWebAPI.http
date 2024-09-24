@@ -1,0 +1,6 @@
+@MinimalWebAPI_HostAddress = http://localhost:5097
+
+GET {{MinimalWebAPI_HostAddress}}/todos/3fa85f64-5717-4562-b3fc-2c963f66afa6
+Accept: application/json
+
+###
