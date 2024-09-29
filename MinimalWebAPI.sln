@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI", "MinimalWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.Tests", "MinimalWebAPI.Tests\MinimalWebAPI.Tests.csproj", "{2C03042C-CEAC-4142-BC9B-3FBE59AA0485}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalWebAPI.AppHost", "MinimalWebAPI.AppHost\MinimalWebAPI.AppHost.csproj", "{4FB91602-2EA0-4021-B81C-8595C1D3F1AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.ServiceDefaults", "MinimalWebAPI.ServiceDefaults\MinimalWebAPI.ServiceDefaults.csproj", "{A8786501-874D-4DC6-A331-783F8EE11575}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{2C03042C-CEAC-4142-BC9B-3FBE59AA0485}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C03042C-CEAC-4142-BC9B-3FBE59AA0485}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C03042C-CEAC-4142-BC9B-3FBE59AA0485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FB91602-2EA0-4021-B81C-8595C1D3F1AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB91602-2EA0-4021-B81C-8595C1D3F1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB91602-2EA0-4021-B81C-8595C1D3F1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB91602-2EA0-4021-B81C-8595C1D3F1AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8786501-874D-4DC6-A331-783F8EE11575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8786501-874D-4DC6-A331-783F8EE11575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8786501-874D-4DC6-A331-783F8EE11575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8786501-874D-4DC6-A331-783F8EE11575}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

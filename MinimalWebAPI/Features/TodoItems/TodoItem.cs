@@ -5,6 +5,7 @@
 namespace MinimalWebAPI.Features.TodoItems;
 
 using MinimalWebAPI.Infrastructure.Persistence;
+using Newtonsoft.Json;
 
 /// <summary>
 /// TodoItem.
@@ -24,6 +25,7 @@ public class TodoItem : IEntity
     /// <summary>
     /// Gets a unique identifier for the item.
     /// </summary>
+    // [JsonProperty("id")]
     public Guid Id { get; init; } = Guid.NewGuid();
 
     /// <summary>

@@ -8,6 +8,8 @@
  */
 
 using FluentValidation;
+using Microsoft.Azure.Cosmos;
+using Microsoft.Extensions.Hosting;
 using MinimalWebAPI;
 using MinimalWebAPI.Features.TodoItems;
 using MinimalWebAPI.Infrastructure.Persistence;
@@ -15,14 +17,21 @@ using MinimalWebAPI.Infrastructure.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.AddAzureCosmosClient(
+    connectionName: "cosmos",
+    configureClientOptions: options => options.SerializerOptions = new CosmosSerializationOptions { PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-builder.Services.AddSingleton(new Repository()); // A quick in memory repository for the demo to show how to inject services into endpoints
+builder.Services.AddSingleton<Repository>(); // A quick in memory repository for the demo to show how to inject services into endpoints
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -34,6 +43,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapEndpoints();
+
+await app.CreateDatabaseAndContainers(); // Create the database and containers if they do not exist
 
 await app.RunAsync();
 
