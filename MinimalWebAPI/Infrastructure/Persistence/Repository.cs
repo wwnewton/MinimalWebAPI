@@ -48,6 +48,26 @@ public class Repository
         return await container.ReadItemAsync<T>(id.ToString(), new PartitionKey(id.ToString()));
     }
 
+    /// <summary>
+    /// Get all items of type T.
+    /// </summary>
+    /// <typeparam name="T">Type of entity.</typeparam>
+    /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+    public async Task<IEnumerable<T>> GetAllAsync<T>()
+        where T : IEntity
+    {
+        var container = this.cosmosDb.GetContainer(GetContainerName<T>());
+        var query = container.GetItemQueryIterator<T>();
+        var results = new List<T>();
+        while (query.HasMoreResults)
+        {
+            var response = await query.ReadNextAsync();
+            results.AddRange(response);
+        }
+
+        return results;
+    }
+
     private static string GetContainerName<T>()
     {
         var containereName = typeof(T).Name;

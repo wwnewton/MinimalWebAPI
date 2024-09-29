@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MinimalWebAPI.UI\MinimalWebAPI.UI.csproj" />
     <ProjectReference Include="..\MinimalWebAPI\MinimalWebAPI.csproj" />
   </ItemGroup>
 

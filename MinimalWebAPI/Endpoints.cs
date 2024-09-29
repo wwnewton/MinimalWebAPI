@@ -22,7 +22,8 @@ public static class Endpoints
         app.MapGroup("/todo-items")
            .WithTags("TodoItems")
            .MapEndpoint<CreateTodoItem>()
-           .MapEndpoint<GetTodoItemById>();
+           .MapEndpoint<GetTodoItemById>()
+           .MapEndpoint<GetTodoItems>();
 
         // Notice that the endpoints are in the order of registration.
         app.MapGroup("/notes")
