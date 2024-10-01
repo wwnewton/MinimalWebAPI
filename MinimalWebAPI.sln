@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI", "MinimalWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.Tests", "MinimalWebAPI.Tests\MinimalWebAPI.Tests.csproj", "{2C03042C-CEAC-4142-BC9B-3FBE59AA0485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalWebAPI.AppHost", "MinimalWebAPI.AppHost\MinimalWebAPI.AppHost.csproj", "{4FB91602-2EA0-4021-B81C-8595C1D3F1AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.AppHost", "MinimalWebAPI.AppHost\MinimalWebAPI.AppHost.csproj", "{4FB91602-2EA0-4021-B81C-8595C1D3F1AD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.ServiceDefaults", "MinimalWebAPI.ServiceDefaults\MinimalWebAPI.ServiceDefaults.csproj", "{A8786501-874D-4DC6-A331-783F8EE11575}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalWebAPI.UI", "MinimalWebAPI.UI\MinimalWebAPI.UI.csproj", "{DEE94446-B31B-4242-A809-D3B2083F0D7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.UI", "MinimalWebAPI.UI\MinimalWebAPI.UI.csproj", "{DEE94446-B31B-4242-A809-D3B2083F0D7A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.CosmosInitializer", "MinimalWebAPI.CosmosInitializer\MinimalWebAPI.CosmosInitializer.csproj", "{173BF39C-E88E-4653-BD40-6F0D55EB8C34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DEE94446-B31B-4242-A809-D3B2083F0D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEE94446-B31B-4242-A809-D3B2083F0D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEE94446-B31B-4242-A809-D3B2083F0D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{173BF39C-E88E-4653-BD40-6F0D55EB8C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{173BF39C-E88E-4653-BD40-6F0D55EB8C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{173BF39C-E88E-4653-BD40-6F0D55EB8C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{173BF39C-E88E-4653-BD40-6F0D55EB8C34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

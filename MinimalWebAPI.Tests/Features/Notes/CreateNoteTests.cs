@@ -1,8 +1,8 @@
-﻿// <copyright file="CreateTodoItemTests.cs" company="Newton Software">
+﻿// <copyright file="CreateNoteTests.cs" company="Newton Software">
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Tests.Features.TodoItems;
+namespace MinimalWebAPI.Tests.Features.Notes;
 
 using System;
 using System.Collections.Generic;
@@ -10,44 +10,37 @@ using System.Linq;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Aspire.Hosting.Testing;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Testing;
 using MinimalWebAPI.Tests.Infrastructure;
 using Snapshooter.Xunit;
-using Xunit;
 
 /// <summary>
-/// TodoItem tests.
+/// Create note tests.
 /// </summary>
-/// <remarks>
-/// Initializes a new instance of the <see cref="CreateTodoItemTests"/> class.
-/// </remarks>
+/// <param name="factory">App host factory.</param>
 [Collection("SharedTestCollection")]
-public class CreateTodoItemTests(AppHostFactory factory)
+public class CreateNoteTests(AppHostFactory factory)
 {
     private readonly AppHostFactory factory = factory;
 
     /// <summary>
-    /// Create a valid TodoItem.
+    /// Create a valid Note.
     /// </summary>
     /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
     [Fact]
-    public async Task CreateValidTodoItem()
+    public async Task CreateValidNote()
     {
         // Arrange
         var apiClient = this.factory.App!.CreateHttpClient("minimalwebapi");
 
         // Act
-        var response = await apiClient.PostAsJsonAsync("/todo-items", new { Title = "Test" });
+        var response = await apiClient.PostAsJsonAsync("/notes", new { Name = "Test", Description = "Test Description" });
 
         // Assert
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         var content = await response.Content.ReadAsStringAsync();
         content.MatchSnapshot(matchOptions: matchOption => matchOption
-            .Assert(fo => Assert.NotEqual(Guid.Empty, fo.Field<Guid>("id")))
-            .Assert(fo => Assert.NotNull(fo.Field<DateTime?>("createdDate"))));
+            .Assert(fo => Assert.NotEqual(Guid.Empty, fo.Field<Guid>("id"))));
     }
 }

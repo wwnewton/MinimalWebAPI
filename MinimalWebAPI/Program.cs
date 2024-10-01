@@ -27,7 +27,7 @@ builder.AddAzureCosmosClient(
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-builder.Services.AddSingleton<Repository>(); // A quick in memory repository for the demo to show how to inject services into endpoints
+builder.Services.AddSingleton<Repository>();
 
 var app = builder.Build();
 
@@ -44,8 +44,7 @@ app.UseHttpsRedirection();
 
 app.MapEndpoints();
 
-await app.CreateDatabaseAndContainers(); // Create the database and containers if they do not exist
-
+// await app.CreateDatabaseAndContainers(); // Create the database and containers if they do not exist
 await app.RunAsync();
 
 /// <summary>
