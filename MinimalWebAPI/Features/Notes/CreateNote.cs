@@ -5,7 +5,9 @@
 namespace MinimalWebAPI.Features.Notes;
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Azure.Messaging.ServiceBus;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -27,10 +29,16 @@ public class CreateNote : IEndpoint
            .WithSummary("Create note.")
            .WithRequestValidation<CreateNoteRequest>();
 
-    private static async Task<CreatedAtRoute<Note>> Handle(CreateNoteRequest command, Repository repository)
+    private static async Task<CreatedAtRoute<Note>> Handle(CreateNoteRequest command, Repository repository, ServiceBusClient serviceBusClient)
     {
         var note = new Note(command.Name, command.Description);
         await repository.AddAsync(note);
+        await using var sender = serviceBusClient.CreateSender("test");
+        var message = new ServiceBusMessage(JsonSerializer.Serialize(note))
+        {
+            Subject = "NoteCreated",
+        };
+        await sender.SendMessageAsync(message);
         return TypedResults.CreatedAtRoute(note, "GetNoteById", new { note.Id });
     }
 

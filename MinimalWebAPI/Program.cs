@@ -24,6 +24,7 @@ builder.AddServiceDefaults();
 builder.AddAzureCosmosClient(
     connectionName: "cosmos",
     configureClientOptions: options => options.SerializerOptions = new CosmosSerializationOptions { PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase });
+builder.AddAzureServiceBusClient("messaging");
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();

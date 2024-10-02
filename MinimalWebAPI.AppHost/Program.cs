@@ -7,8 +7,11 @@ var cosmosDb = builder.AddAzureCosmosDB("cosmos")
 var cosmosInitializer = builder.AddProject<Projects.MinimalWebAPI_CosmosInitializer>("minimalwebapi-cosmosinitializer")
     .WithReference(cosmosDb);
 
+var serviceBus = builder.AddConnectionString("messaging");
+
 var api = builder.AddProject<Projects.MinimalWebAPI>("minimalwebapi")
-    .WithReference(cosmosDb);
+    .WithReference(cosmosDb)
+    .WithReference(serviceBus);
 
 builder.AddProject<Projects.MinimalWebAPI_UI>("minimalwebapi-ui")
     .WithReference(api);
