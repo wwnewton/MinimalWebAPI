@@ -44,19 +44,4 @@ app.UseHttpsRedirection();
 
 app.MapEndpoints();
 
-// await app.CreateDatabaseAndContainers(); // Create the database and containers if they do not exist
 await app.RunAsync();
-
-/// <summary>
-/// Program class.
-/// Needed to be able to crate the WebApplication factory in unit tests.
-/// </summary>
-public partial class Program
-{
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Program"/> class.
-    /// </summary>
-    protected Program()
-    {
-    }
-}

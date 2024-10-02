@@ -12,6 +12,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Aspire.Hosting.Testing;
+using FluentAssertions;
 using MinimalWebAPI.Tests.Infrastructure;
 using Snapshooter.Xunit;
 
@@ -41,6 +42,6 @@ public class CreateNoteTests(AppHostFactory factory)
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         var content = await response.Content.ReadAsStringAsync();
         content.MatchSnapshot(matchOptions: matchOption => matchOption
-            .Assert(fo => Assert.NotEqual(Guid.Empty, fo.Field<Guid>("id"))));
+            .Assert(fo => fo.Field<Guid>("id").Should().NotBeEmpty()));
     }
 }

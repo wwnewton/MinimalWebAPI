@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Aspire.Hosting.Testing;
+using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using MinimalWebAPI.Tests.Infrastructure;
@@ -47,7 +48,7 @@ public class CreateTodoItemTests(AppHostFactory factory)
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         var content = await response.Content.ReadAsStringAsync();
         content.MatchSnapshot(matchOptions: matchOption => matchOption
-            .Assert(fo => Assert.NotEqual(Guid.Empty, fo.Field<Guid>("id")))
-            .Assert(fo => Assert.NotNull(fo.Field<DateTime?>("createdDate"))));
+            .Assert(fo => fo.Field<Guid>("id").Should().NotBeEmpty())
+            .Assert(fo => fo.Field<DateTime?>("createdDate").Should().NotBeNull()));
     }
 }
