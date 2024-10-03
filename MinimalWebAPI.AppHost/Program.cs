@@ -1,7 +1,8 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var cosmosDb = builder.AddAzureCosmosDB("cosmos")
-    .RunAsEmulator().AddDatabase("todo");
+var cache = builder.AddRedis("cache");
+
+var cosmosDb = builder.AddConnectionString("cosmos");
 
 // This initializes the Cosmos DB database and containers for cosmos emulator.
 var cosmosInitializer = builder.AddProject<Projects.MinimalWebAPI_CosmosInitializer>("minimalwebapi-cosmosinitializer")
@@ -11,10 +12,16 @@ var serviceBus = builder.AddConnectionString("messaging");
 
 var api = builder.AddProject<Projects.MinimalWebAPI>("minimalwebapi")
     .WithReference(cosmosDb)
-    .WithReference(serviceBus);
+    .WithReference(serviceBus)
+    .WithReference(cache);
 
 builder.AddProject<Projects.MinimalWebAPI_UI>("minimalwebapi-ui")
     .WithReference(api);
+
+
+
+builder.AddProject<Projects.MinimalWebAPI_Functions>("minimalwebapi-functions")
+    .WithReference(serviceBus);
 
 
 

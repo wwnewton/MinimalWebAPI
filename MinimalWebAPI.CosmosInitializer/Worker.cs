@@ -56,6 +56,12 @@ public class Worker : BackgroundService
                     this.logger.LogInformation("Created database {DatabaseName}", databaseName);
                     return createDatabaseResponse.Database;
                 }
+
+                if (createDatabaseResponse.StatusCode == HttpStatusCode.OK)
+                {
+                    this.logger.LogInformation("Database {DatabaseName} already exists", databaseName);
+                    return createDatabaseResponse.Database;
+                }
             }
             catch (CosmosException ex)
             {

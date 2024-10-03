@@ -7,6 +7,8 @@ namespace MinimalWebAPI.Features.TodoItems;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Caching.Distributed;
+using MinimalWebAPI.Infrastructure.Caching;
 using MinimalWebAPI.Infrastructure.Endpoints;
 using MinimalWebAPI.Infrastructure.Persistence;
 
@@ -23,9 +25,9 @@ public class GetTodoItems : IEndpoint
            .WithSummary("Get todo item by id.");
     }
 
-    private static async Task<Ok<IEnumerable<TodoItem>>> Handle(Repository repository)
+    private static async Task<Ok<IEnumerable<TodoItem>>> Handle(Repository repository, IDistributedCache cache)
     {
-        var todoItems = await repository.GetAllAsync<TodoItem>();
+        var todoItems = await cache.GetOrAddAsync("todoItems", repository.GetAllAsync<TodoItem>);
         return TypedResults.Ok(todoItems);
     }
 }

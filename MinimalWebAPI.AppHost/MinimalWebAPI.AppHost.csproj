@@ -13,10 +13,12 @@
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.1" />
     <PackageReference Include="Aspire.Hosting.Azure.CosmosDB" Version="8.2.1" />
     <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="8.2.1" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="8.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MinimalWebAPI.CosmosInitializer\MinimalWebAPI.CosmosInitializer.csproj" />
+    <ProjectReference Include="..\MinimalWebAPI.Functions\MinimalWebAPI.Functions.csproj" />
     <ProjectReference Include="..\MinimalWebAPI.UI\MinimalWebAPI.UI.csproj" />
     <ProjectReference Include="..\MinimalWebAPI\MinimalWebAPI.csproj" />
   </ItemGroup>

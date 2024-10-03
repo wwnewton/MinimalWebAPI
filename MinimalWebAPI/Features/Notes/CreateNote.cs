@@ -32,7 +32,11 @@ public class CreateNote : IEndpoint
     private static async Task<CreatedAtRoute<Note>> Handle(CreateNoteRequest command, Repository repository, ServiceBusClient serviceBusClient)
     {
         var note = new Note(command.Name, command.Description);
+
+        // This could end up saving the note to the database before the message is sent.
         await repository.AddAsync(note);
+
+        // This could be wrapped in a service or masstransit.
         await using var sender = serviceBusClient.CreateSender("test");
         var message = new ServiceBusMessage(JsonSerializer.Serialize(note))
         {
