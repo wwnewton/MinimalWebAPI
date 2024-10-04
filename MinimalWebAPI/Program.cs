@@ -9,11 +9,8 @@
 
 using FluentValidation;
 using Microsoft.Azure.Cosmos;
-using Microsoft.Extensions.Hosting;
 using MinimalWebAPI;
-using MinimalWebAPI.Features.TodoItems;
 using MinimalWebAPI.Infrastructure.Persistence;
-using MinimalWebAPI.Infrastructure.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 
