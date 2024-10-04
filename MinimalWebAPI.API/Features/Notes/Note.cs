@@ -2,9 +2,9 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Features.Notes;
+namespace MinimalWebAPI.API.Features.Notes;
 
-using MinimalWebAPI.Infrastructure.Persistence;
+using MinimalWebAPI.API.Infrastructure.Persistence;
 
 /// <summary>
 /// Note.

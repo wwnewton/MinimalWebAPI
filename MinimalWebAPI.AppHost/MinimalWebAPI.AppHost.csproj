@@ -17,10 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MinimalWebAPI.API\MinimalWebAPI.API.csproj" />
     <ProjectReference Include="..\MinimalWebAPI.CosmosInitializer\MinimalWebAPI.CosmosInitializer.csproj" />
     <ProjectReference Include="..\MinimalWebAPI.Functions\MinimalWebAPI.Functions.csproj" />
     <ProjectReference Include="..\MinimalWebAPI.UI\MinimalWebAPI.UI.csproj" />
-    <ProjectReference Include="..\MinimalWebAPI\MinimalWebAPI.csproj" />
   </ItemGroup>
 
 </Project>

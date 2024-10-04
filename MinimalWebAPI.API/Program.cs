@@ -10,7 +10,7 @@
 using FluentValidation;
 using Microsoft.Azure.Cosmos;
 using MinimalWebAPI;
-using MinimalWebAPI.Infrastructure.Persistence;
+using MinimalWebAPI.API.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

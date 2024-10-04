@@ -4,9 +4,9 @@
 
 namespace MinimalWebAPI;
 
-using MinimalWebAPI.Features.Notes;
-using MinimalWebAPI.Features.TodoItems;
-using MinimalWebAPI.Infrastructure.Endpoints;
+using MinimalWebAPI.API.Features.Notes;
+using MinimalWebAPI.API.Features.TodoItems;
+using MinimalWebAPI.API.Infrastructure.Endpoints;
 
 /// <summary>
 /// Map endpoint extensions.

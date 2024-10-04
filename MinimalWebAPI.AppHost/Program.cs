@@ -10,7 +10,7 @@ var cosmosInitializer = builder.AddProject<Projects.MinimalWebAPI_CosmosInitiali
 
 var serviceBus = builder.AddConnectionString("messaging");
 
-var api = builder.AddProject<Projects.MinimalWebAPI>("minimalwebapi")
+var api = builder.AddProject<Projects.MinimalWebAPI_API>("minimalwebapi-api")
     .WithReference(cosmosDb)
     .WithReference(serviceBus)
     .WithReference(cache);

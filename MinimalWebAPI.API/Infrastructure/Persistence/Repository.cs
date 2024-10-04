@@ -2,7 +2,7 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Infrastructure.Persistence;
+namespace MinimalWebAPI.API.Infrastructure.Persistence;
 
 using Microsoft.Azure.Cosmos;
 

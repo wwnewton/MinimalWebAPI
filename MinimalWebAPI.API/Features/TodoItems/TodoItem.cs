@@ -2,9 +2,9 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Features.TodoItems;
+namespace MinimalWebAPI.API.Features.TodoItems;
 
-using MinimalWebAPI.Infrastructure.Persistence;
+using MinimalWebAPI.API.Infrastructure.Persistence;
 
 /// <summary>
 /// TodoItem.

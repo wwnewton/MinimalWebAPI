@@ -2,12 +2,12 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Features.Notes;
+namespace MinimalWebAPI.API.Features.Notes;
 
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
-using MinimalWebAPI.Infrastructure.Endpoints;
-using MinimalWebAPI.Infrastructure.Persistence;
+using MinimalWebAPI.API.Infrastructure.Endpoints;
+using MinimalWebAPI.API.Infrastructure.Persistence;
 
 /// <summary>
 /// Get note by id endpoint.

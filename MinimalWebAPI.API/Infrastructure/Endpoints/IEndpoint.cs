@@ -2,7 +2,7 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Infrastructure.Endpoints;
+namespace MinimalWebAPI.API.Infrastructure.Endpoints;
 
 /// <summary>
 /// Interface for an endpoint.

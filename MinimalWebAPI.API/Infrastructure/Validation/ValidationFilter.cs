@@ -2,7 +2,7 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Infrastructure.Validation;
+namespace MinimalWebAPI.API.Infrastructure.Validation;
 
 using FluentValidation;
 

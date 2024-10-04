@@ -2,7 +2,7 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Features.Notes;
+namespace MinimalWebAPI.API.Features.Notes;
 
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -11,9 +11,9 @@ using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
-using MinimalWebAPI.Infrastructure.Endpoints;
-using MinimalWebAPI.Infrastructure.Persistence;
-using MinimalWebAPI.Infrastructure.Validation;
+using MinimalWebAPI.API.Infrastructure.Endpoints;
+using MinimalWebAPI.API.Infrastructure.Persistence;
+using MinimalWebAPI.API.Infrastructure.Validation;
 
 /// <summary>
 /// Create note endpoint.

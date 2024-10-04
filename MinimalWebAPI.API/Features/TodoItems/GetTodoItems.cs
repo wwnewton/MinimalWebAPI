@@ -2,14 +2,14 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Features.TodoItems;
+namespace MinimalWebAPI.API.Features.TodoItems;
 
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Caching.Distributed;
-using MinimalWebAPI.Infrastructure.Caching;
-using MinimalWebAPI.Infrastructure.Endpoints;
-using MinimalWebAPI.Infrastructure.Persistence;
+using MinimalWebAPI.API.Infrastructure.Caching;
+using MinimalWebAPI.API.Infrastructure.Endpoints;
+using MinimalWebAPI.API.Infrastructure.Persistence;
 
 /// <summary>
 /// Get todoItems.

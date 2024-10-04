@@ -2,7 +2,7 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
-namespace MinimalWebAPI.Infrastructure.Caching;
+namespace MinimalWebAPI.API.Infrastructure.Caching;
 
 using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;

@@ -10,7 +10,7 @@ builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
-builder.Services.AddHttpClient("todoapi", client => client.BaseAddress = new Uri("https://minimalwebapi"));
+builder.Services.AddHttpClient("todoapi", client => client.BaseAddress = new Uri("https://minimalwebapi-api"));
 
 var app = builder.Build();
 
