@@ -30,7 +30,7 @@ public class CreateNote : IEndpoint
     {
         var note = new Note(command.Name, command.Description);
 
-        // This could end up saving the note to the database before the message is sent.
+        // This could end up saving the note but not sending the service bus message.
         await repository.AddAsync(note);
 
         // This could be wrapped in a service or masstransit.
