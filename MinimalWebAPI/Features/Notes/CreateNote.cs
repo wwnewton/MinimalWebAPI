@@ -4,7 +4,6 @@
 
 namespace MinimalWebAPI.Features.Notes;
 
-using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
@@ -12,8 +11,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Azure.Cosmos;
-using MinimalWebAPI.Features.TodoItems;
 using MinimalWebAPI.Infrastructure.Endpoints;
 using MinimalWebAPI.Infrastructure.Persistence;
 using MinimalWebAPI.Infrastructure.Validation;

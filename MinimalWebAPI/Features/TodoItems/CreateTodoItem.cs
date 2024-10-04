@@ -6,12 +6,10 @@ namespace MinimalWebAPI.Features.TodoItems;
 
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using MinimalWebAPI.Infrastructure.Endpoints;
 using MinimalWebAPI.Infrastructure.Persistence;
 using MinimalWebAPI.Infrastructure.Validation;
-using static MinimalWebAPI.Features.TodoItems.CreateTodoItem;
 
 /// <summary>
 /// Create a new TodoItem.

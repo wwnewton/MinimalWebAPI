@@ -5,7 +5,6 @@
 namespace MinimalWebAPI.Features.Notes;
 
 using MinimalWebAPI.Infrastructure.Persistence;
-using Newtonsoft.Json;
 
 /// <summary>
 /// Note.
@@ -26,7 +25,6 @@ public class Note : IEntity
     /// <summary>
     /// Gets a unique identifier for the note.
     /// </summary>
-    // [JsonProperty("id")]
     public Guid Id { get; init; } = Guid.NewGuid();
 
     /// <summary>

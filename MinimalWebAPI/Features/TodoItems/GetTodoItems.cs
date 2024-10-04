@@ -5,7 +5,6 @@
 namespace MinimalWebAPI.Features.TodoItems;
 
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Caching.Distributed;
 using MinimalWebAPI.Infrastructure.Caching;
