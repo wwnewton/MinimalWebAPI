@@ -22,7 +22,7 @@ public class GetTodoItems : IEndpoint
     {
         app.MapGet("/", Handle)
            .WithName("GetTodoItems")
-           .WithSummary("Get todo item by id.");
+           .WithSummary("Get all todo items.");
     }
 
     private static async Task<Ok<IEnumerable<TodoItem>>> Handle(Repository repository, IDistributedCache cache)
