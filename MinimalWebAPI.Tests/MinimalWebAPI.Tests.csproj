@@ -8,6 +8,23 @@
 		<IsTestProject>true</IsTestProject>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
+	<PropertyGroup Label="FineCodeCoverage">
+		<Enabled>
+			True
+		</Enabled>
+		<ModulePathsInclude>
+			MinimalWebAPI.*
+		</ModulePathsInclude>
+		<ModulePathsExclude>
+			Aspire.*
+			FluentValidation.*
+			HealthChecks.*
+			IdentityModel.*
+			Microsoft.*
+			StackExchange.*
+		</ModulePathsExclude>
+		<IncludeTestAssembly>False</IncludeTestAssembly>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
