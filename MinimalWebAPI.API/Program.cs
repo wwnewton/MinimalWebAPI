@@ -8,9 +8,13 @@
  */
 
 using FluentValidation;
+using MassTransit;
+using MassTransit.Middleware;
 using Microsoft.Azure.Cosmos;
 using MinimalWebAPI;
+using MinimalWebAPI.API.Features.Notes;
 using MinimalWebAPI.API.Infrastructure.Persistence;
+using MinimalWebAPI.Shared.Notes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +25,15 @@ builder.AddServiceDefaults();
 builder.AddAzureCosmosClient(
     connectionName: "cosmos",
     configureClientOptions: options => options.SerializerOptions = new CosmosSerializationOptions { PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase });
-builder.AddAzureServiceBusClient("messaging");
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingAzureServiceBus((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration.GetConnectionString("messaging"));
+        EndpointConvention.Map<NoteCreated>(new Uri("queue:test"));
+        GlobalTopology.Send.UseCorrelationId<NoteCreated>(x => x.Id);
+    });
+});
 builder.AddRedisDistributedCache("cache");
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

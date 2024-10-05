@@ -22,10 +22,10 @@ public class CreateTodoItem : IEndpoint
            .WithSummary("Create todo item.")
            .WithRequestValidation<CreateTodoItemRequest>();
 
-    private static async Task<CreatedAtRoute<TodoItem>> Handle(CreateTodoItemRequest command, Repository repository)
+    private static async Task<CreatedAtRoute<TodoItem>> Handle(CreateTodoItemRequest command, Repository repository, CancellationToken cancellationToken)
     {
         var todoItem = new TodoItem(command.Title);
-        await repository.AddAsync(todoItem);
+        await repository.AddAsync(todoItem, cancellationToken);
         return TypedResults.CreatedAtRoute(todoItem, "GetTodoItemById", new { todoItem.Id });
     }
 

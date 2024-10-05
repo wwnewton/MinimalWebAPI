@@ -27,12 +27,13 @@ public class Repository
     /// </summary>
     /// <typeparam name="T">Type of entity.</typeparam>
     /// <param name="entity">entity.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public async Task AddAsync<T>(T entity)
+    public async Task AddAsync<T>(T entity, CancellationToken cancellationToken)
         where T : IEntity
     {
         var container = this.cosmosDb.GetContainer(GetContainerName<T>());
-        await container.CreateItemAsync(entity);
+        await container.CreateItemAsync(entity, cancellationToken: cancellationToken);
     }
 
     /// <summary>
@@ -40,12 +41,13 @@ public class Repository
     /// </summary>
     /// <typeparam name="T">Type of entity.</typeparam>
     /// <param name="id">Id of entity.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>An entity of type T.</returns>
-    public async Task<T?> GetByIdAsync<T>(Guid id)
+    public async Task<T?> GetByIdAsync<T>(Guid id, CancellationToken cancellationToken)
         where T : IEntity
     {
         var container = this.cosmosDb.GetContainer(GetContainerName<T>());
-        return await container.ReadItemAsync<T>(id.ToString(), new PartitionKey(id.ToString()));
+        return await container.ReadItemAsync<T>(id.ToString(), new PartitionKey(id.ToString()), cancellationToken: cancellationToken);
     }
 
     /// <summary>
@@ -53,7 +55,8 @@ public class Repository
     /// </summary>
     /// <typeparam name="T">Type of entity.</typeparam>
     /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-    public async Task<IEnumerable<T>> GetAllAsync<T>()
+    /// <param name="cancellationToken">Cancellation token.</param>
+    public async Task<IEnumerable<T>> GetAllAsync<T>(CancellationToken cancellationToken)
         where T : IEntity
     {
         var container = this.cosmosDb.GetContainer(GetContainerName<T>());
@@ -61,7 +64,7 @@ public class Repository
         var results = new List<T>();
         while (query.HasMoreResults)
         {
-            var response = await query.ReadNextAsync();
+            var response = await query.ReadNextAsync(cancellationToken);
             results.AddRange(response);
         }
 

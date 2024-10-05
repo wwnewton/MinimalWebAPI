@@ -8,12 +8,14 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
 using FluentValidation;
+using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
 using MinimalWebAPI.API.Infrastructure.Endpoints;
 using MinimalWebAPI.API.Infrastructure.Persistence;
 using MinimalWebAPI.API.Infrastructure.Validation;
+using MinimalWebAPI.Shared.Notes;
 
 /// <summary>
 /// Create note endpoint.
@@ -26,20 +28,13 @@ public class CreateNote : IEndpoint
            .WithSummary("Create note.")
            .WithRequestValidation<CreateNoteRequest>();
 
-    private static async Task<CreatedAtRoute<Note>> Handle(CreateNoteRequest command, Repository repository, ServiceBusClient serviceBusClient)
+    private static async Task<CreatedAtRoute<Note>> Handle(CreateNoteRequest command, Repository repository, IBus bus, CancellationToken cancellationToken)
     {
         var note = new Note(command.Name, command.Description);
 
         // This could end up saving the note but not sending the service bus message.
-        await repository.AddAsync(note);
-
-        // This could be wrapped in a service or masstransit.
-        await using var sender = serviceBusClient.CreateSender("test");
-        var message = new ServiceBusMessage(JsonSerializer.Serialize(note))
-        {
-            Subject = "NoteCreated",
-        };
-        await sender.SendMessageAsync(message);
+        await repository.AddAsync(note, cancellationToken);
+        await bus.Send(new NoteCreated(note.Id, note.Name, note.Description), cancellationToken);
         return TypedResults.CreatedAtRoute(note, "GetNoteById", new { note.Id });
     }
 

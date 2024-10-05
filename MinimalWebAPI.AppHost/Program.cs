@@ -25,4 +25,9 @@ builder.AddProject<Projects.MinimalWebAPI_Functions>("minimalwebapi-functions")
 
 
 
+//builder.AddProject<Projects.MinimalWebAPI_NoteProcessor>("minimalwebapi-noteprocessor")
+//    .WithReference(serviceBus);
+
+
+
 builder.Build().Run();

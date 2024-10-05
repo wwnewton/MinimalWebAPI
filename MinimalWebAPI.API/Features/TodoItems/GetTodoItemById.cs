@@ -24,7 +24,7 @@ public class GetTodoItemById : IEndpoint
 
     private static async Task<Results<Ok<TodoItem>, NotFound>> Handle([AsParameters] GetTodoItemByIdRequest request, Repository repository)
     {
-        var todoItem = await repository.GetByIdAsync<TodoItem>(request.Id);
+        var todoItem = await repository.GetByIdAsync<TodoItem>(request.Id, CancellationToken.None);
         if (todoItem is null)
         {
             return TypedResults.NotFound();

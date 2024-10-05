@@ -1,9 +1,22 @@
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+// <copyright file="Program.cs" company="Newton Software">
+// Copyright (c) Newton Software. All rights reserved.
+// </copyright>
 
-var builder = FunctionsWebApplicationBuilder.CreateBuilder();
-builder.AddServiceDefaults();
+using MassTransit;
+using Microsoft.Extensions.Hosting;
+using MinimalWebAPI.Functions;
+
+var builder = new HostBuilder()
+    .ConfigureFunctionsWebApplication()
+    .AddServiceDefaults();
+
+builder.ConfigureServices(services =>
+    services.AddMassTransitForAzureFunctions(
+        x =>
+        {
+           x.AddConsumersFromNamespaceContaining<NoteConsumer>();
+        },
+        "ConnectionStrings:messaging"));
 
 var host = builder.Build();
 

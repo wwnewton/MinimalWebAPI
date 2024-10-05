@@ -19,11 +19,12 @@ public static class Extensions
     /// <param name="cache">Cache.</param>
     /// <param name="key">Key.</param>
     /// <param name="factory">Factory to get item if it does not exist.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
     /// <param name="options">Distributed cache options.</param>
     /// <returns>Cache item of type T.</returns>
-    public static async Task<T?> GetOrAddAsync<T>(this IDistributedCache cache, string key, Func<Task<T>> factory, DistributedCacheEntryOptions? options = null)
+    public static async Task<T?> GetOrAddAsync<T>(this IDistributedCache cache, string key, Func<Task<T>> factory, CancellationToken cancellationToken, DistributedCacheEntryOptions? options = null)
     {
-        var value = await cache.GetStringAsync(key);
+        var value = await cache.GetStringAsync(key, cancellationToken);
         if (value is not null)
         {
             return JsonSerializer.Deserialize<T>(value);
@@ -31,7 +32,7 @@ public static class Extensions
 
         var result = await factory();
         var cacheOptions = options ?? new DistributedCacheEntryOptions() { AbsoluteExpiration = DateTime.Now.AddSeconds(30), };
-        await cache.SetAsync(key, JsonSerializer.SerializeToUtf8Bytes(result), cacheOptions);
+        await cache.SetAsync(key, JsonSerializer.SerializeToUtf8Bytes(result), cacheOptions, cancellationToken);
 
         return result;
     }

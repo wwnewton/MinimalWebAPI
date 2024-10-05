@@ -24,9 +24,9 @@ public class GetTodoItems : IEndpoint
            .WithSummary("Get all todo items.");
     }
 
-    private static async Task<Ok<IEnumerable<TodoItem>>> Handle(Repository repository, IDistributedCache cache)
+    private static async Task<Ok<IEnumerable<TodoItem>>> Handle(Repository repository, IDistributedCache cache, CancellationToken cancellationToken)
     {
-        var todoItems = await cache.GetOrAddAsync("todoItems", repository.GetAllAsync<TodoItem>);
+        var todoItems = await cache.GetOrAddAsync("todoItems", () => repository.GetAllAsync<TodoItem>(cancellationToken), cancellationToken: cancellationToken);
         return TypedResults.Ok(todoItems);
     }
 }

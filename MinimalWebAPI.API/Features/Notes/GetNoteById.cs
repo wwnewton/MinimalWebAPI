@@ -20,9 +20,9 @@ public class GetNoteById : IEndpoint
            .WithName("GetNoteById")
            .WithSummary("Get note by id.");
 
-    private static async Task<Results<Ok<Note>, NotFound>> Handle([AsParameters] GetNoteByIdRequest request, Repository repository)
+    private static async Task<Results<Ok<Note>, NotFound>> Handle([AsParameters] GetNoteByIdRequest request, Repository repository, CancellationToken cancellationToken)
     {
-        var note = await repository.GetByIdAsync<Note>(request.Id);
+        var note = await repository.GetByIdAsync<Note>(request.Id, cancellationToken);
         if (note is null)
         {
             return TypedResults.NotFound();
