@@ -41,11 +41,5 @@ public class Function1
         CancellationToken cancellationToken)
     {
         await this.messageReceiver.HandleConsumer<NoteConsumer>("test", message, cancellationToken);
-        //this.logger.LogInformation("Message ID: {id}", message.MessageId);
-        //this.logger.LogInformation("Message Body: {body}", message.Body);
-        //this.logger.LogInformation("Message Content-Type: {contentType}", message.ContentType);
-
-        //// Complete the message
-        //await messageActions.CompleteMessageAsync(message);
     }
 }
