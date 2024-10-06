@@ -9,10 +9,8 @@
 
 using FluentValidation;
 using MassTransit;
-using MassTransit.Middleware;
 using Microsoft.Azure.Cosmos;
 using MinimalWebAPI;
-using MinimalWebAPI.API.Features.Notes;
 using MinimalWebAPI.API.Infrastructure.Persistence;
 using MinimalWebAPI.Shared.Notes;
 
