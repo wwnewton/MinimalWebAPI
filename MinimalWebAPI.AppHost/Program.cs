@@ -2,13 +2,18 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder.AddRedis("cache");
 
-var cosmosDb = builder.AddConnectionString("cosmos");
+var serviceBus = builder.AddAzureServiceBus("messaging")
+        .AddQueue("test");
 
-// This initializes the Cosmos DB database and containers for cosmos emulator.
-var cosmosInitializer = builder.AddProject<Projects.MinimalWebAPI_CosmosInitializer>("minimalwebapi-cosmosinitializer")
-    .WithReference(cosmosDb);
+var cosmosDb = builder.AddAzureCosmosDB("cosmos")
+        .AddDatabase("todo");
 
-var serviceBus = builder.AddConnectionString("messaging");
+// This initializes the Cosmos DB database for local testing only.
+if (!builder.ExecutionContext.IsPublishMode)
+{
+    var cosmosInitializer = builder.AddProject<Projects.MinimalWebAPI_CosmosInitializer>("minimalwebapi-cosmosinitializer")
+        .WithReference(cosmosDb);
+}
 
 var api = builder.AddProject<Projects.MinimalWebAPI_API>("minimalwebapi-api")
     .WithReference(cosmosDb)
@@ -18,16 +23,7 @@ var api = builder.AddProject<Projects.MinimalWebAPI_API>("minimalwebapi-api")
 builder.AddProject<Projects.MinimalWebAPI_UI>("minimalwebapi-ui")
     .WithReference(api);
 
-
-
 builder.AddProject<Projects.MinimalWebAPI_Functions>("minimalwebapi-functions")
     .WithReference(serviceBus);
-
-
-
-//builder.AddProject<Projects.MinimalWebAPI_NoteProcessor>("minimalwebapi-noteprocessor")
-//    .WithReference(serviceBus);
-
-
 
 builder.Build().Run();
