@@ -2,11 +2,15 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder.AddRedis("cache");
 
-var serviceBus = builder.AddAzureServiceBus("messaging")
-        .AddQueue("test");
+var serviceBus = builder.ExecutionContext.IsPublishMode
+    ? builder.AddAzureServiceBus("messaging")
+        .AddQueue("test")
+    : builder.AddConnectionString("messaging");
 
-var cosmosDb = builder.AddAzureCosmosDB("cosmos")
-        .AddDatabase("todo");
+var cosmosDb = builder.ExecutionContext.IsPublishMode
+    ? builder.AddAzureCosmosDB("cosmos")
+        .AddDatabase("todo")
+    : builder.AddConnectionString("cosmos");
 
 // This initializes the Cosmos DB database for local testing only.
 if (!builder.ExecutionContext.IsPublishMode)
