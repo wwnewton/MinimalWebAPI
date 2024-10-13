@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>91aab860-22e7-4ee9-af5f-751ca8ec5cd9</UserSecretsId>
+	<AnalysisLevel>latest-all</AnalysisLevel>
   </PropertyGroup>
 
   <ItemGroup>

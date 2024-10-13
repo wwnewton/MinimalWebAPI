@@ -12,18 +12,15 @@ using Microsoft.Extensions.Logging;
 /// </summary>
 public class Function1
 {
-    private readonly ILogger<Function1> logger;
     private readonly IMessageReceiver messageReceiver;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Function1"/> class.
     /// </summary>
-    /// <param name="logger">Logger.</param>
     /// <param name="messageReceiver">Message receiver.</param>
-    public Function1(ILogger<Function1> logger, IMessageReceiver messageReceiver)
+    public Function1(IMessageReceiver messageReceiver)
     {
         this.messageReceiver = messageReceiver;
-        this.logger = logger;
     }
 
     /// <summary>

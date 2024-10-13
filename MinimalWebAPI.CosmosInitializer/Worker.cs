@@ -18,7 +18,7 @@ public class Worker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await ConnectToDatabase();
+        await this.ConnectToDatabase();
         var database = await this.CreateDatabase("todo");
         await this.CreateContainer(database, "todoItem", "/id");
         await this.CreateContainer(database, "note", "/id");
@@ -33,12 +33,12 @@ public class Worker : BackgroundService
             try
             {
                 await this.cosmosClient.ReadAccountAsync();
-                this.logger.LogInformation("Connected to Cosmos DB");
+                this.logger.ConnectedToCosmosDb();
                 break;
             }
             catch (HttpRequestException ex) when (ex.HttpRequestError is HttpRequestError.SecureConnectionError)
             {
-                this.logger.LogWarning(ex, "Failed to connect to Cosmos DB. Retrying in 1 seconds.");
+                this.logger.LogFailedToConnectToCosmosDb(ex);
                 await Task.Delay(1000);
             }
         }
@@ -53,19 +53,19 @@ public class Worker : BackgroundService
                 var createDatabaseResponse = await this.cosmosClient.CreateDatabaseIfNotExistsAsync(databaseName);
                 if (createDatabaseResponse.StatusCode == HttpStatusCode.Created)
                 {
-                    this.logger.LogInformation("Created database {DatabaseName}", databaseName);
+                    this.logger.LogDatabaseCreated(databaseName);
                     return createDatabaseResponse.Database;
                 }
 
                 if (createDatabaseResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    this.logger.LogInformation("Database {DatabaseName} already exists", databaseName);
+                    this.logger.LogDatabaseExists(databaseName);
                     return createDatabaseResponse.Database;
                 }
             }
             catch (CosmosException ex)
             {
-                this.logger.LogWarning(ex, "Error creating database {DatabaseName}. Retrying in 1 seconds.", databaseName);
+                this.logger.LogErrorCreatingDatabase(ex, databaseName);
                 await Task.Delay(1000);
             }
         }
@@ -80,16 +80,40 @@ public class Worker : BackgroundService
                 var containerResponse = await database!.CreateContainerIfNotExistsAsync(containerName, partitionKey);
                 if (containerResponse.StatusCode == HttpStatusCode.Created)
                 {
-                    this.logger.LogInformation("Created container {ContainerName}", containerName);
+                    this.logger.LogContainerCreated(containerName);
                 }
 
                 break;
             }
             catch (CosmosException ex)
             {
-                this.logger.LogWarning(ex, "Error creating container {ContainerName}. Retrying in 1 seconds.", containerName);
+                this.logger.LogErrorCreatingContainer(ex, containerName);
                 await Task.Delay(1000);
             }
         }
     }
+}
+
+public static partial class Log
+{
+    [LoggerMessage(EventId = 0, Level = LogLevel.Information, Message = "Connected to Cosmos DB")]
+    public static partial void ConnectedToCosmosDb(this ILogger logger);
+
+    [LoggerMessage(EventId = 1, Level = LogLevel.Warning, Message = "Failed to connect to Cosmos DB. Retrying in 1 seconds.")]
+    public static partial void LogFailedToConnectToCosmosDb(this ILogger logger, Exception ex);
+
+    [LoggerMessage(EventId = 2, Level = LogLevel.Information, Message = "Created database {DatabaseName}")]
+    public static partial void LogDatabaseCreated(this ILogger logger, string databaseName);
+
+    [LoggerMessage(EventId = 3, Level = LogLevel.Information, Message = "Database {DatabaseName} already exists")]
+    public static partial void LogDatabaseExists(this ILogger logger, string databaseName);
+
+    [LoggerMessage(EventId = 4, Level = LogLevel.Warning, Message = "Error creating database {DatabaseName}. Retrying in 1 seconds.")]
+    public static partial void LogErrorCreatingDatabase(this ILogger logger, Exception ex, string databaseName);
+
+    [LoggerMessage(EventId = 5, Level = LogLevel.Information, Message = "Created container {ContainerName}")]
+    public static partial void LogContainerCreated(this ILogger logger, string containerName);
+
+    [LoggerMessage(EventId = 6, Level = LogLevel.Warning, Message = "Error creating container {ContainerName}. Retrying in 1 seconds.")]
+    public static partial void LogErrorCreatingContainer(this ILogger logger, Exception ex, string containerName);
 }

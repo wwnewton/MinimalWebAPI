@@ -26,6 +26,7 @@ public class ValidationFilter<TRequest> : IEndpointFilter
     /// <inheritdoc/>
     public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
     {
+        ArgumentNullException.ThrowIfNull(context);
         var request = context.Arguments.OfType<TRequest>().First();
         var result = await this.validator.ValidateAsync(request, context.HttpContext.RequestAborted);
         if (!result.IsValid)
@@ -33,6 +34,6 @@ public class ValidationFilter<TRequest> : IEndpointFilter
             return TypedResults.ValidationProblem(result.ToDictionary());
         }
 
-        return await next(context);
+        return next is null ? default : await next(context);
     }
 }

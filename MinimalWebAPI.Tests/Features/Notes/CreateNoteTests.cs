@@ -33,7 +33,7 @@ public class CreateNoteTests(AppHostFactory factory)
     public async Task CreateValidNote()
     {
         // Arrange
-        var apiClient = this.factory.App!.CreateHttpClient("minimalwebapi-api");
+        using var apiClient = this.factory.App!.CreateHttpClient("minimalwebapi-api");
 
         // Act
         var response = await apiClient.PostAsJsonAsync("/notes", new { Name = "Test", Description = "Test Description" });

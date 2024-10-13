@@ -5,6 +5,7 @@
 namespace MinimalWebAPI.API.Infrastructure.Persistence;
 
 using Microsoft.Azure.Cosmos;
+using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Generic repository.
@@ -17,7 +18,7 @@ public class Repository
     /// Initializes a new instance of the <see cref="Repository"/> class.
     /// </summary>
     /// <param name="cosmosClient">Cosmos db client.</param>
-    public Repository(CosmosClient cosmosClient)
+    public Repository([NotNull] CosmosClient cosmosClient)
     {
         this.cosmosDb = cosmosClient.GetDatabase("todo");
     }

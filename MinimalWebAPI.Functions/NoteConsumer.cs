@@ -27,6 +27,7 @@ public class NoteConsumer : IConsumer<NoteCreated>
     /// <inheritdoc/>
     public Task Consume(ConsumeContext<NoteCreated> context)
     {
+        ArgumentNullException.ThrowIfNull(context);
         this.logger.LogInformation("Received note created: {Id}", context.Message.Id);
         return Task.CompletedTask;
     }

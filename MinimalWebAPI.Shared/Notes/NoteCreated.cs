@@ -2,8 +2,9 @@
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
+#pragma warning disable CA1716
 namespace MinimalWebAPI.Shared.Notes;
-
+#pragma warning restore CA1716
 using System;
 
 /// <summary>

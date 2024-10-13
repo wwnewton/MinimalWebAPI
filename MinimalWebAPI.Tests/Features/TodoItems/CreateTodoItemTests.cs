@@ -39,7 +39,7 @@ public class CreateTodoItemTests(AppHostFactory factory)
     public async Task CreateValidTodoItem()
     {
         // Arrange
-        var apiClient = this.factory.App!.CreateHttpClient("minimalwebapi-api");
+        using var apiClient = this.factory.App!.CreateHttpClient("minimalwebapi-api");
 
         // Act
         var response = await apiClient.PostAsJsonAsync("/todo-items", new { Title = "Test" });

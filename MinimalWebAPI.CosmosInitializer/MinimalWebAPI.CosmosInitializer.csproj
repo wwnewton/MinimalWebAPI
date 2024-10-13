@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-MinimalWebAPI.CosmosInitializer-46c9e905-cdd4-4a10-9a78-5a6d39edceec</UserSecretsId>
+	<AnalysisLevel>latest-all</AnalysisLevel>
   </PropertyGroup>
 
   <ItemGroup>

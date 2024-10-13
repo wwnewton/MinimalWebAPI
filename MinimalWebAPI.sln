@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.CosmosInitial
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.Functions", "MinimalWebAPI.Functions\MinimalWebAPI.Functions.csproj", "{61F176A1-8787-459F-A673-11B328179CF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalWebAPI.Shared", "MinimalWebAPI.Shared\MinimalWebAPI.Shared.csproj", "{3B007E9A-6C30-4436-A103-8DA0D33C2DE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebAPI.Shared", "MinimalWebAPI.Shared\MinimalWebAPI.Shared.csproj", "{3B007E9A-6C30-4436-A103-8DA0D33C2DE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<AnalysisLevel>latest-all</AnalysisLevel>
 	</PropertyGroup>
 	<PropertyGroup Label="FineCodeCoverage">
 		<Enabled>
@@ -27,10 +27,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Aspire.Hosting.Testing" Version="8.2.1" />
 		<PackageReference Include="Aspire.Microsoft.Azure.Cosmos" Version="8.2.1" />
 		<PackageReference Include="coverlet.collector" Version="6.0.2">
@@ -42,10 +38,6 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
 		<PackageReference Include="Snapshooter.Xunit" Version="0.14.1" />
 		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.32.0.97167">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

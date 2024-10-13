@@ -11,8 +11,10 @@ using MinimalWebAPI.API.Infrastructure.Endpoints;
 /// <summary>
 /// Map endpoint extensions.
 /// </summary>
+#pragma warning disable CA1724 // Type names should not match namespaces
 public static class Endpoints
 {
+#pragma warning restore CA1724 // Type names should not match namespaces
     /// <summary>
     /// Map all endpoints.
     /// </summary>

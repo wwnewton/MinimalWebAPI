@@ -1,4 +1,4 @@
-﻿// <copyright file="SharedTestCollection.cs" company="Newton Software">
+﻿// <copyright file="SharedTestSetup.cs" company="Newton Software">
 // Copyright (c) Newton Software. All rights reserved.
 // </copyright>
 
@@ -14,6 +14,6 @@ using System.Threading.Tasks;
 /// Shared test collection.
 /// </summary>
 [CollectionDefinition("SharedTestCollection")]
-public class SharedTestCollection : ICollectionFixture<AppHostFactory>
+public class SharedTestSetup : ICollectionFixture<AppHostFactory>
 {
 }

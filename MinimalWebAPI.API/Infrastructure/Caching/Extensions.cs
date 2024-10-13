@@ -10,7 +10,9 @@ using Microsoft.Extensions.Caching.Distributed;
 /// <summary>
 /// IDistributedCache extensions.
 /// </summary>
+#pragma warning disable CA1724 // Type names should not match namespaces
 public static class Extensions
+#pragma warning restore CA1724 // Type names should not match namespaces
 {
     /// <summary>
     /// Get or add an item to the cache.
@@ -24,13 +26,14 @@ public static class Extensions
     /// <returns>Cache item of type T.</returns>
     public static async Task<T?> GetOrAddAsync<T>(this IDistributedCache cache, string key, Func<Task<T>> factory, CancellationToken cancellationToken, DistributedCacheEntryOptions? options = null)
     {
+        ArgumentNullException.ThrowIfNull(cache);
         var value = await cache.GetStringAsync(key, cancellationToken);
         if (value is not null)
         {
             return JsonSerializer.Deserialize<T>(value);
         }
 
-        var result = await factory();
+        var result = factory is null ? default : await factory();
         var cacheOptions = options ?? new DistributedCacheEntryOptions() { AbsoluteExpiration = DateTime.Now.AddSeconds(30), };
         await cache.SetAsync(key, JsonSerializer.SerializeToUtf8Bytes(result), cacheOptions, cancellationToken);
 
